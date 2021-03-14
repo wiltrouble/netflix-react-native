@@ -1,8 +1,7 @@
 import * as React from 'react';
 
 import { Image, FlatList } from 'react-native';
-import categories from '../../assets/data/categories';
-import { Text, View } from '../../components/Themed';
+import { Text } from '../../components/Themed';
 
 import styles from './styles';
 
@@ -17,8 +16,6 @@ interface HomeCategoryProps {
     }
 }
 
-
-
 const HomeScreen = (props: HomeCategoryProps) => {
     const { category } = props;
     return (
@@ -30,6 +27,7 @@ const HomeScreen = (props: HomeCategoryProps) => {
             <Image style={styles.image} source={{uri: item.poster}}/>
             )}
             horizontal
+            showsHorizontalScrollIndicator={false}
         />
       </>
   );
