@@ -5,7 +5,7 @@ import * as React from 'react';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import TabOneScreen from '../screens/TabOneScreen';
+import HomeScreen from '../screens/HomeScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { BottomTabParamList, HomeParamList, TabTwoParamList } from '../types';
 
@@ -20,30 +20,30 @@ export default function BottomTabNavigator() {
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
       <BottomTab.Screen
         name="Home"
-        component={TabOneNavigator}
+        component={HomeScreen}
         options={{
-          tabBarIcon: ({ color }) => <AntDesign name="home" size={24} />,
+          tabBarIcon: ({ color }) => <AntDesign name="home" size={24} color={color}/>,
         }}
       />
       <BottomTab.Screen
-        name="Comming Soon"
+        name="Comming_Soon"
         component={TabOneNavigator}
         options={{
-          tabBarIcon: ({ color }) => <MaterialIcons name="video-library" size={24} />,
+          tabBarIcon: ({ color }) => <MaterialIcons name="video-library" size={24} color={color}/>,
         }}
       />
       <BottomTab.Screen
         name="Search"
         component={TabOneNavigator}
         options={{
-          tabBarIcon: ({ color }) => <Ionicons name="search" size={24} />,
+          tabBarIcon: ({ color }) => <Ionicons name="search" size={24} color={color}/>,
         }}
       />
       <BottomTab.Screen
         name="Download"
         component={TabOneNavigator}
         options={{
-          tabBarIcon: ({ color }) => <AntDesign name="download" size={24} />,
+          tabBarIcon: ({ color }) => <AntDesign name="download" size={24} color={color}/>,
         }}
       />
     </BottomTab.Navigator>
@@ -59,7 +59,7 @@ function TabOneNavigator() {
     <HomeStack.Navigator>
       <HomeStack.Screen
         name="HomeScreen"
-        component={TabOneScreen}
+        component={HomeScreen}
         options={{ headerShown: false }}
       />
     </HomeStack.Navigator>
