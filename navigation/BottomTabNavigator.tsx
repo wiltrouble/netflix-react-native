@@ -6,6 +6,7 @@ import * as React from 'react';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import HomeScreen from '../screens/HomeScreen';
+import MovieDetailsScreen from "../screens/MovieDetailScreen";
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { BottomTabParamList, HomeParamList, TabTwoParamList } from '../types';
 
@@ -20,14 +21,14 @@ export default function BottomTabNavigator() {
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
       <BottomTab.Screen
         name="Home"
-        component={HomeScreen}
+        component={TabOneNavigator}
         options={{
           tabBarIcon: ({ color }) => <AntDesign name="home" size={24} color={color}/>,
         }}
       />
       <BottomTab.Screen
         name="Comming_Soon"
-        component={TabOneNavigator}
+        component={TabTwoNavigator}
         options={{
           tabBarIcon: ({ color }) => <MaterialIcons name="video-library" size={24} color={color}/>,
         }}
@@ -57,6 +58,13 @@ const HomeStack = createStackNavigator<HomeParamList>();
 function TabOneNavigator() {
   return (
     <HomeStack.Navigator>
+      <HomeStack.Screen
+        name="MovieDetailsScreen"
+        component={MovieDetailsScreen}
+        options={{
+          title: ''
+         }}
+      />
       <HomeStack.Screen
         name="HomeScreen"
         component={HomeScreen}
