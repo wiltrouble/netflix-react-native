@@ -19,7 +19,7 @@ const EpisodeItem = (props: EpisodeItemProps) => {
     const { episode } = props;
 
     return (
-        <View style={{marginVertical: 10}}>
+        <View style={{margin: 10}}>
             <View style={styles.row}>
                 <Image style={styles.image} source={{uri: episode.poster}}></Image>
                 <View style={styles.titleContainer}>

@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState} from 'react'
 import { View, Text } from "../../components/Themed";
 import { Image, Pressable } from "react-native";
 import { MaterialIcons, Entypo, AntDesign, Ionicons,FontAwesome,Feather } from '@expo/vector-icons'; 
 import EpisodeItem from "../../components/EpisodeItem";
-
+import { Picker } from "@react-native-picker/picker";
 
 import movie from "../../assets/data/movie";
 import styles from './styles'
@@ -13,6 +13,10 @@ const firstSeason = movie.seasons.items[0]
 const firstEpisode = movie.seasons.items[0].episodes.items[0];
 
 const MovieDetailsScreen = () => {
+
+    const [currentSeason setCurrentSeason] = useState(firstSeason);
+
+    const seasonsNames = movie.seasons.items.map(season => season.name);
     return (
         <View>
             
@@ -20,7 +24,7 @@ const MovieDetailsScreen = () => {
             
 
             <FlatList
-                data={firstSeason.episodes.items}
+                data={currentSeason.episodes.items}
                 renderItem={({ item }) => (<EpisodeItem episode={item}/>)}
                 style={{marginBottom: 250}}
                 ListHeaderComponent={(
@@ -74,6 +78,20 @@ const MovieDetailsScreen = () => {
                                 <Text style={{color: 'darkgrey', marginTop: 5 }}>Share</Text>
                             </View>
                         </View>
+
+                        <Picker
+                            selectedValue={currentSeason.name}
+                            onValueChange={(itemValue, itemIndex) => {
+                                setCurrentSeason(movie.seasons.items[itemIndex])
+                            }} 
+                            style={{color: 'white', width: 130}}
+                            dropdownIconColor={'white'}
+                            >
+                                {seasonsNames.map(seasonName =>(
+                                    <Picker.Item label={seasonName} value={seasonName} key={seasonName}/>
+                                ))}
+                            
+                        </Picker>
                         </View>
                 )}
             />
