@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text } from "../../components/Themed";
 import { Image, Pressable } from "react-native";
 import { MaterialIcons, Entypo, AntDesign, Ionicons } from '@expo/vector-icons'; 
+import EpisodeItem from "../../components/EpisodeItem";
 
 
 import movies from "../../assets/data/movie";
@@ -16,6 +17,7 @@ const MovieDetailsScreen = () => {
             <Image style={styles.image} source={{uri: firstEpisode.poster}}/>
             
             <View style={{padding: 12}}>
+                <EpisodeItem episode={firstEpisode}/>
                 <Text style={styles.title}>{movies.title}</Text>
                 <View style={{flexDirection: 'row'}}>
                     <Text style={styles.match}>97% match</Text>
