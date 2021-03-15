@@ -1,14 +1,16 @@
 import React from 'react'
 import { View, Text } from "../../components/Themed";
 import { Image, Pressable } from "react-native";
-import { MaterialIcons, Entypo, AntDesign, Ionicons } from '@expo/vector-icons'; 
+import { MaterialIcons, Entypo, AntDesign, Ionicons,FontAwesome,Feather } from '@expo/vector-icons'; 
 import EpisodeItem from "../../components/EpisodeItem";
 
 
-import movies from "../../assets/data/movie";
+import movie from "../../assets/data/movie";
 import styles from './styles'
+import { FlatList } from 'react-native-gesture-handler';
 
-const firstEpisode = movies.seasons.items[0].episodes.items[0];
+const firstSeason = movie.seasons.items[0]
+const firstEpisode = movie.seasons.items[0].episodes.items[0];
 
 const MovieDetailsScreen = () => {
     return (
@@ -16,60 +18,65 @@ const MovieDetailsScreen = () => {
             
             <Image style={styles.image} source={{uri: firstEpisode.poster}}/>
             
-            <View style={{padding: 12}}>
-                <EpisodeItem episode={firstEpisode}/>
-                <Text style={styles.title}>{movies.title}</Text>
-                <View style={{flexDirection: 'row'}}>
-                    <Text style={styles.match}>97% match</Text>
-                    <Text style={styles.year}>{movies.year}</Text>
-                    <View style={styles.ageContainer}>
-                        <Text style={styles.age}>12+</Text>
-                    </View>
-                    <Text style={styles.year}>{movies.numberOfSeasons} Seasons</Text>
-                    <MaterialIcons name="hd" size={24} color="white" />
 
+            <FlatList
+                data={firstSeason.episodes.items}
+                renderItem={({ item }) => (<EpisodeItem episode={item}/>)}
+                style={{marginBottom: 250}}
+                ListHeaderComponent={(
+                    <View style={{ padding: 12 }}>
+                        <Text style={styles.title}>{movie.title}</Text>
+                        <View style={{flexDirection: 'row'}}>
+                            <Text style={styles.match}>98% match</Text>
+                            <Text style={styles.year}>{movie.year}</Text>
+                            <View style={styles.ageContainer}>
+                                <Text style={styles.age}>12+</Text>
+                            </View>
+                            <Text style={styles.year}>{movie.numberOfSeasons} Seasons</Text>
+                            <MaterialIcons name="hd" size={24} color="white" />
+                        </View>
 
-                </View>
-            </View>
+                        {/* Play Button */}
+                        <Pressable onPress={() => { console.warn('Plage')}} style={styles.playButton}>
+                            <Text style={styles.playButtonText}>
+                                <Entypo name="controller-play" size={16} color="black" />
+                                Play
+                            </Text>
+                        </Pressable>
 
-            {/* Play Button */}
-            <Pressable onPress={() => { console.warn('Plage')}} style={styles.playButton}>
-                <Text style={styles.playButtonText}>
-                    <Entypo name="controller-play" size={20} color="black" />
-                    Play
-                </Text>
-            </Pressable>
+                        {/* Download Button */}
+                        <Pressable onPress={() => { console.warn('Download')}} style={styles.downloadButton}>
+                            <Text style={styles.downloadButtonText}>
+                                <AntDesign name="download" size={16} color="white" />
+                                {' '}
+                                Download
+                            </Text>
+                        </Pressable>
 
-            {/* Download Button */}
-            <Pressable onPress={() => { console.warn('Download')}} style={styles.downloadButton}>
-                <Text style={styles.downloadButtonText}>
-                    <AntDesign name="download" size={24} color="white" style={{paddingRight: 5}} />
-                    {' '}
-                    Download
-                </Text>
-            </Pressable>
+                        <Text style={{ marginVertical: 10 }}>{movie.plot}</Text>
+                        <Text style={styles.year}>Cast: {movie.cast}</Text>
+                        <Text style={styles.year}>Creator: {movie.creator}</Text>
+                    
+                        {/* Row with icon buttons */}
+                        <View style={{flexDirection: 'row', marginTop: 20,}}>
+                            <View style={{alignItems: 'center', marginHorizontal: 20}}>
+                                <AntDesign name="plus" size={24} color={'white'} />
+                                <Text style={{color: 'darkgrey', marginTop: 5}}>My List</Text>
+                            </View>
 
-            <Text style={{marginVertical: 10}}>{movies.plot}</Text>
-            <Text style={styles.year}>Cast: {movies.cast}</Text>
-            <Text>Creator: {movies.creator}</Text>
+                            <View style={{alignItems: 'center', marginHorizontal: 20}}>
+                                <Feather name="thumbs-up" size={24} color="white" />
+                                <Text style={{color: 'darkgrey', marginTop: 5}}>Rate</Text>
+                            </View>
 
-            {/* Row with icon buttons */}
-            <View style={{flexDirection: 'row'}}>
-                <View style={{alignItems: 'center', marginHorizontal: 20}}>
-                    <AntDesign name="plus" size={24} color="white" />
-                    <Text style={{color: 'darkgray', marginTop: 5}}>My List</Text>
-                </View>
-
-                <View style={{alignItems: 'center', marginHorizontal: 20}}>
-                    <AntDesign name="like2" size={24} color="white" />
-                    <Text style={{color: 'darkgray', marginTop: 5}}>Rate</Text>
-                </View>
-
-                <View style={{alignItems: 'center', marginHorizontal: 20}}>
-                    <Ionicons name="ios-share-outline" size={24} color="white" />
-                    <Text style={{color: 'darkgray', marginTop: 5}}>Share</Text>
-                </View>
-            </View>
+                            <View style={{alignItems: 'center', marginHorizontal: 20}}>
+                                <FontAwesome name="send-o" size={24} color="white" />
+                                <Text style={{color: 'darkgrey', marginTop: 5 }}>Share</Text>
+                            </View>
+                        </View>
+                        </View>
+                )}
+            />
         </View>
     )
 }
