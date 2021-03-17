@@ -1,10 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { View, Text } from 'react-native'
 import { Video } from 'expo-av';
 import { Episode } from '../../types';
 import styles from './styles';
 import { Playback } from 'expo-av/build/AV';
-import { FlatList } from 'react-native-gesture-handler';
 
 interface VideoPlayerProps {
     episode: Episode;
